@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\baiqu106\.Rider2018.1\system\resharper-host\Local\Transient\ReSharperHost\v12\SolutionCaches\_PhotonTest.-1553134189.00" t="ExcludeRecursive" />
-    <e p="D:\Unity3D\Demo\PhotonTest" t="IncludeRecursive">
+    <e p="C:\Users\baiqu106\.Rider2018.1\system\resharper-host\Local\Transient\ReSharperHost\v12\SolutionCaches\_PhotonTest.-1186128149.00" t="ExcludeRecursive" />
+    <e p="D:\GitHubRoot\PhotonGitTest\PhotonTest" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
@@ -329,6 +329,7 @@
         <e p="Scripts" t="Include">
           <e p="LauncherZL.cs" t="Include" />
           <e p="LoginServer.cs" t="Include" />
+          <e p="Move.cs" t="Include" />
           <e p="PlayController.cs" t="Include" />
           <e p="RolateCube.cs" t="Include" />
         </e>

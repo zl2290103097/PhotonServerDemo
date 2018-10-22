@@ -124,6 +124,7 @@ e90403eeda069970e0b9de1533de13a6 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 e7ee600e4c4e51778c1f22e2deab89e5 Assembly-CSharp.dll:Photon.Realtime.Demo.ConnectAndJoinRandomLb
 feacaee5ed4058b236c5f853a8f9af21 Assembly-CSharp.dll:Photon.Pun.Demo.Cockpit.RoomListCell
 7fbc4d61ad30ec11f795e9b864b893f9 Assembly-CSharp.dll:Photon.Pun.Demo.Cockpit.FriendListCell
+5d03bc8a7a26c8e71f7ee59cff2813e7 Assembly-CSharp.dll:Photon.Pun.Demo.Asteroids.LauncherZL
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:Photon.Pun.Demo.Procedural.IngameControlPanel
 3d9992eb9e8452d2fb21ba548bd4aca1 Assembly-CSharp.dll:Photon.Pun.Demo.Cockpit.CountOfPlayersProperty
 b87489ab766d13f2828c3b682a0e5806 Assembly-CSharp.dll:Photon.Pun.Demo.SlotRacer.Utils.BezierCurve
@@ -194,8 +195,10 @@ ae74fc196a06f796692fe7705044f8ec PhotonUnityNetworking.dll:Photon.Pun.PhotonRigi
 3d9992eb9e8452d2fb21ba548bd4aca1 Assembly-CSharp.dll:Photon.Pun.Demo.Cockpit.PingProperty
 9f03c0a4cccd0560c7c48bd8874c83fb PhotonRealtime.dll:Photon.Realtime.ConnectionHandler
 b52fce0caba9c9c9a5860008b527f5ce Assembly-CSharp.dll:Photon.Pun.Demo.Cockpit.PlayerDetailsController
+486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.RolateCube
 fa262644fac0869ddef8222cdcdc1af7 Assembly-CSharp.dll:Photon.Pun.Demo.Cockpit.GameVersionField
 486cd95c82d8305219c352c06b776e1f Unity.TextMeshPro.dll:TMPro.TMP_SpriteAnimator
+41321a88797cdbacc2f878685fa05f57 Assembly-CSharp.dll:.LoginServer
 1cc9baa78a24dea7ed624158098d6539 PhotonUnityNetworking.dll:Photon.Pun.PhotonTransformView
 3d9992eb9e8452d2fb21ba548bd4aca1 Assembly-CSharp.dll:Photon.Pun.Demo.Cockpit.CurrentRoomPropertiesListedInLobbyProperty
 56d8f0196718f9907882cb25ad680971 Assembly-CSharp.dll:Photon.Pun.Demo.Cockpit.PropertyListenerBase
@@ -305,13 +308,11 @@ d1eaa3d26bc8f6c963d62aa0b45c5d1a Assembly-CSharp.dll:Photon.Pun.Demo.Cockpit.Fri
 3d9992eb9e8452d2fb21ba548bd4aca1 Assembly-CSharp.dll:Photon.Pun.Demo.Cockpit.CurrentRoomIsOfflineProperty
 8bef788b78533d4ce46ed58ecf501257 Assembly-CSharp.dll:Photon.Pun.Demo.Procedural.WorldGenerator
 7664ca902df0a1dee452d7c6be999ac1 Assembly-CSharp.dll:Photon.Pun.Demo.Asteroids.Spaceship
+11d3e4326f9ad5a2c2ae809816067c8d Assembly-CSharp.dll:.PlayController
 02b6c1244bc5e55b0115d0cb0446d94a Assembly-CSharp.dll:Photon.Pun.Demo.Cockpit.Forms.ConnectToRegionUIForm
 8a8845bb67e1b8ca34dc31f6c0f82773 Assembly-CSharp.dll:Photon.Pun.Demo.Cockpit.BoolInputField
 3b87d3cd1748568e8c33cb73b8d32c6d PhotonUnityNetworking.Utilities.dll:Photon.Pun.UtilityScripts.CountdownTimer
 f1d2955b217f217e8ae21c91116e86e4 Assembly-CSharp.dll:Photon.Pun.Demo.Cockpit.Forms.UserIdUiForm
 3d9992eb9e8452d2fb21ba548bd4aca1 Assembly-CSharp.dll:Photon.Pun.Demo.Cockpit.CountOfRoomsProperty
 424f3aad821677fab5a6a08fbbf773db Assembly-CSharp.dll:Photon.Pun.Demo.Asteroids.LobbyTopPanel
-41321a88797cdbacc2f878685fa05f57 Assembly-CSharp.dll:.LoginServer
-11d3e4326f9ad5a2c2ae809816067c8d Assembly-CSharp.dll:.PlayController
-486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.RolateCube
-486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:Photon.Pun.Demo.Asteroids.LauncherZL
+d3baf945a28bf6b4a4706c8193e7459e Assembly-CSharp.dll:Photon.Pun.Demo.Asteroids.Move

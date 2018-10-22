@@ -17,8 +17,8 @@ public class PlayController : MonoBehaviour {
 
     public void BiggerButtonAction()
     {
-        Debug.Log("变大按钮");
-        cube.transform.localScale = new Vector3(3, 3, 3);
+       // Debug.Log("变大按钮");
+        //cube.transform.localScale = new Vector3(3, 3, 3);
     }
 
     public void SmallerButtonAction()

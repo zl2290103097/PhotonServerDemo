@@ -188,7 +188,7 @@ namespace Photon.Pun.Demo.PunBasics
             isConnecting = false;
             controlPanel.SetActive(true);
         }
-
+    
         /// <summary>
         /// Called when entering a room (by creating or joining it). Called on all clients (including the Master Client).
         /// </summary>

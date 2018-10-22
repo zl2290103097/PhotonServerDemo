@@ -1,15 +1,21 @@
-﻿using ExitGames.Client.Photon;
-using Photon.Realtime;
+﻿using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
+//using Photon.Pun.Demo.Asteroids;
+using Photon.Realtime;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 namespace Photon.Pun.Demo.Asteroids
 {
     public class LauncherZL : MonoBehaviourPunCallbacks
     {
-
-
+        public GameObject cube;
+        string gameVersion = "1";
+        public GameObject PlayerListEntryPrefab;
+        
         #region UNITY
 
         public void Awake()
@@ -25,7 +31,7 @@ namespace Photon.Pun.Demo.Asteroids
         public override void OnConnectedToMaster()
         {
             Debug.Log("ZL调用了OnConnectedToMaster方法");
-            PhotonNetwork.JoinRandomRoom();
+//            PhotonNetwork.JoinRandomRoom();
 //            RoomOptions options = new RoomOptions {MaxPlayers = 6};
 //            PhotonNetwork.CreateRoom("roomTest", options, null);
         }
@@ -34,10 +40,10 @@ namespace Photon.Pun.Demo.Asteroids
         {
             Debug.Log("ZL调用了----OnJoinedLobby");
         }
+
         public override void OnRoomListUpdate(List<RoomInfo> roomList)
         {
 //            ClearRoomListView();
-//
 //            UpdateCachedRoomList(roomList);
 //            UpdateRoomListView();
         }
@@ -51,26 +57,47 @@ namespace Photon.Pun.Demo.Asteroids
 
         public override void OnCreateRoomFailed(short returnCode, string message)
         {
+            Debug.Log("创建房间失败");
             //SetActivePanel(SelectionPanel.name);
         }
 
         public override void OnJoinRoomFailed(short returnCode, string message)
         {
+            Debug.Log("加入房间失败---");
             //SetActivePanel(SelectionPanel.name);
         }
 
         public override void OnJoinRandomFailed(short returnCode, string message)
         {
-            string roomName = "Room " + Random.Range(1000, 10000);
-
-            RoomOptions options = new RoomOptions {MaxPlayers = 8};
-
-            PhotonNetwork.CreateRoom(roomName, options, null);
+//            string roomName = "Room " + Random.Range(1000, 10000);
+//
+//            RoomOptions options = new RoomOptions {MaxPlayers = 8};
+//
+//            PhotonNetwork.CreateRoom(roomName, options, null);
         }
 
         public override void OnJoinedRoom()
         {
-           // SetActivePanel(InsideRoomPanel.name);
+
+            Debug.Log("加入房间陈工");
+            Debug.Log("获取到该房间的Player的个数为"+PhotonNetwork.PlayerList.Length);
+            GameObject root = GameObject.Find("Plane");
+            //GameObject oneButton = root.transform.Find("ShunLocation").gameObject;
+            GameObject entry = PhotonNetwork.Instantiate("Player", new Vector3(0,0,0), Quaternion.identity, 0);
+            //GameObject entry = PhotonNetwork.Instantiate(Resources.Load<GameObject>("Player"));
+//            entry.transform.SetParent(root.transform);
+//            entry.transform.localScale = new Vector3(0.1F,0.1F,0.1F);
+            foreach (Player p in PhotonNetwork.PlayerList)
+            {
+               // PhotonNetwork.Instantiate(PlayerListEntryPrefab)
+//                GameObject entry = Instantiate(Resources.Load<GameObject>("Player"));
+//                entry.transform.SetParent(this.transform);
+//                entry.transform.localScale = new Vector3(30,30,30);
+//             
+               // entry.GetComponent<PlayerListEntry>().Initialize(p.ActorNumber, p.NickName);
+
+            }
+//        SetActivePanel(InsideRoomPanel.name);
 
 //            if (playerListEntries == null)
 //            {
@@ -104,6 +131,7 @@ namespace Photon.Pun.Demo.Asteroids
 
         public override void OnLeftRoom()
         {
+            Debug.Log("执行了OnLeftRoom");
 //            SetActivePanel(SelectionPanel.name);
 //
 //            foreach (GameObject entry in playerListEntries.Values)
@@ -114,9 +142,22 @@ namespace Photon.Pun.Demo.Asteroids
 //            playerListEntries.Clear();
 //            playerListEntries = null;
         }
+        
 
         public override void OnPlayerEnteredRoom(Player newPlayer)
         {
+            
+//            GameObject root = GameObject.Find("Plane");
+//            //GameObject oneButton = root.transform.Find("ShunLocation").gameObject;
+//            Debug.Log("执行了OnPlayerEnteredRoom");
+//            //GameObject entry = PhotonNetwork.Instantiate(Resources.Load<GameObject>("Player"));
+//            GameObject entry = PhotonNetwork.Instantiate("Player", new Vector3(0,0,0), Quaternion.identity, 1);
+//            entry.transform.SetParent(root.transform);
+//            entry.transform.localScale = new Vector3(1,1,1);
+            
+
+            
+            
 //            GameObject entry = Instantiate(PlayerListEntryPrefab);
 //            entry.transform.SetParent(InsideRoomPanel.transform);
 //            entry.transform.localScale = Vector3.one;
@@ -181,9 +222,27 @@ namespace Photon.Pun.Demo.Asteroids
 //            byte.TryParse(MaxPlayersInputField.text, out maxPlayers);
 //            maxPlayers = (byte) Mathf.Clamp(maxPlayers, 2, 8);
 
-            RoomOptions options = new RoomOptions {MaxPlayers = 6};
+//            RoomOptions options = new RoomOptions {MaxPlayers = 6};
+//
+//            PhotonNetwork.CreateRoom("roomTest", options, null);
+            StartCoroutine(CreateOrJoinRoomZl());
+        }
 
-            PhotonNetwork.CreateRoom("roomTest", options, null);
+        private IEnumerator CreateOrJoinRoomZl()
+        {
+            //如果运行工程，直接创建或者加入房间的话，需要等待几秒先创建房间，否则会报错。
+            yield return new WaitForSeconds(1.0f);
+
+            Debug.Log("CreateOrJoinRoom---------ZL");
+
+            if (!PhotonNetwork.InRoom)
+            {
+//                PhotonNetwork.JoinOrCreateRoom("RoomOne", new RoomOptions { MaxPlayers = 10 }, null);
+                RoomOptions options = new RoomOptions {MaxPlayers = 6};
+
+                PhotonNetwork.CreateRoom("roomTest", options, null);
+            }
+
         }
 
         public void OnJoinRandomRoomButtonClicked()
@@ -200,17 +259,22 @@ namespace Photon.Pun.Demo.Asteroids
 
         public void OnLoginButtonClicked()
         {
-            string playerName = "zzzzz";//PlayerNameInput.text;
+            string playerName = "zzzzz"; //PlayerNameInput.text;
 
-            if (!playerName.Equals(""))
+            if (PhotonNetwork.IsConnected)
             {
-                PhotonNetwork.LocalPlayer.NickName = playerName;
-                PhotonNetwork.GameVersion = "1";
-                PhotonNetwork.ConnectUsingSettings();
+                //LogFeedback("Joining Room...");
+                // #Critical we need at this point to attempt joining a Random Room. If it fails, we'll get notified in OnJoinRandomFailed() and we'll create one.
+                PhotonNetwork.JoinRandomRoom();
             }
             else
             {
-                Debug.LogError("Player Name is invalid.");
+                //LogFeedback("Connecting...");
+
+                // #Critical, we must first and foremost connect to Photon Online Server.
+                PhotonNetwork.LocalPlayer.NickName = playerName;
+                PhotonNetwork.GameVersion = this.gameVersion;
+                PhotonNetwork.ConnectUsingSettings();
             }
         }
 
@@ -326,6 +390,24 @@ namespace Photon.Pun.Demo.Asteroids
 //
 //                roomListEntries.Add(info.Name, entry);
 //            }
+        }
+
+        public void BiggerButtonAction()
+        {
+            if (PhotonNetwork.IsConnected)
+            {
+//                PhotonNetwork.JoinOrCreateRoom("xiaogeformax", new RoomOptions {MaxPlayers = 16}, null);
+                Debug.Log("连接成功后----变大按钮");
+                cube.transform.localScale = new Vector3(3, 3, 3);
+                //PhotonNetwork.JoinRandomRoom();
+//                string roomName = "Room " + Random.Range(1000, 10000);
+//
+//                RoomOptions options = new RoomOptions {MaxPlayers = 8};
+//
+//                PhotonNetwork.CreateRoom(roomName, options, null);
+            }
+
+
         }
     }
 }
