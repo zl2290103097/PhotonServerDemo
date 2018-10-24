@@ -15,6 +15,9 @@ namespace Photon.Pun.Demo.Asteroids
         public GameObject cube;
         string gameVersion = "1";
         public GameObject PlayerListEntryPrefab;
+        public InputField nameField;
+
+        public List<Image> imageLocations; 
         
         #region UNITY
 
@@ -43,6 +46,11 @@ namespace Photon.Pun.Demo.Asteroids
 
         public override void OnRoomListUpdate(List<RoomInfo> roomList)
         {
+            Debug.Log("执行了+++OnRoomListUpdate方法"+roomList.Count);
+            for (int i = 0; i < roomList.Count; i++)
+            {
+                Debug.Log("房间的信息:"+roomList[i].Name);
+            }
 //            ClearRoomListView();
 //            UpdateCachedRoomList(roomList);
 //            UpdateRoomListView();
@@ -79,25 +87,55 @@ namespace Photon.Pun.Demo.Asteroids
         public override void OnJoinedRoom()
         {
 
-            Debug.Log("加入房间陈工");
+            Debug.Log("加入房间成功");
             Debug.Log("获取到该房间的Player的个数为"+PhotonNetwork.PlayerList.Length);
-            GameObject root = GameObject.Find("Plane");
-            //GameObject oneButton = root.transform.Find("ShunLocation").gameObject;
-            GameObject entry = PhotonNetwork.Instantiate("Player", new Vector3(0,0,0), Quaternion.identity, 0);
-            //GameObject entry = PhotonNetwork.Instantiate(Resources.Load<GameObject>("Player"));
-//            entry.transform.SetParent(root.transform);
-//            entry.transform.localScale = new Vector3(0.1F,0.1F,0.1F);
+//            GameObject root = GameObject.Find("Plane");
+//            //GameObject oneButton = root.transform.Find("ShunLocation").gameObject;
+//            GameObject entry = PhotonNetwork.Instantiate("Player", new Vector3(0,0,0), Quaternion.identity, 0);
+//            
+//            
+//            GameObject root02 = GameObject.Find("Canvas");
+//            GameObject oneButton = root02.transform.Find("PlayerSelf").gameObject;
+//            GameObject entry02 = PhotonNetwork.Instantiate("Card", oneButton.transform.position, Quaternion.identity, 0).gameObject;
+//            //GameObject entry = PhotonNetwork.Instantiate(Resources.Load<GameObject>("Player"));
+//            entry02.transform.SetParent(oneButton.gameObject.transform);
+//            entry02.transform.localScale = new Vector3(1.0F,1.0F,1.0F);
+            int k = PhotonNetwork.PlayerList.Length -1;
+            
+            while (k>=0)
+            {
+                Player p = PhotonNetwork.PlayerList[k];
+                Debug.Log("该房间中用户名称为："+p.NickName);
+                GameObject imageloca = imageLocations[k].gameObject;   
+                GameObject entryPlayer = PhotonNetwork.Instantiate("Card", imageloca.transform.position, Quaternion.identity, 0).gameObject;
+                entryPlayer.transform.SetParent(imageloca.transform);
+                entryPlayer.transform.localScale = new Vector3(1.0F,1.0F,1.0F);
+                k--;
+            }
+            
+            
+            
             foreach (Player p in PhotonNetwork.PlayerList)
             {
+//                Debug.Log("该房间中用户名称为："+p.NickName);
                // PhotonNetwork.Instantiate(PlayerListEntryPrefab)
 //                GameObject entry = Instantiate(Resources.Load<GameObject>("Player"));
 //                entry.transform.SetParent(this.transform);
 //                entry.transform.localScale = new Vector3(30,30,30);
 //             
                // entry.GetComponent<PlayerListEntry>().Initialize(p.ActorNumber, p.NickName);
+                if (PhotonNetwork.PlayerList.Length == 3)
+                {
+                    
+                }
+                if (PhotonNetwork.PlayerList.Length == 2)
+                {
+                    
+                }
+
 
             }
-//        SetActivePanel(InsideRoomPanel.name);
+//        SetActivePanel(InsideRoomPanel.name); 
 
 //            if (playerListEntries == null)
 //            {
@@ -146,7 +184,30 @@ namespace Photon.Pun.Demo.Asteroids
 
         public override void OnPlayerEnteredRoom(Player newPlayer)
         {
-            
+            Debug.Log("调用了有玩家进入场景的方法OnPlayerEnteredRoom");
+            Debug.Log("当前用户列表的个数为："+ PhotonNetwork.PlayerList.Length);
+            int k = PhotonNetwork.PlayerList.Length -1;
+            if (k == 1)
+            {
+                Player p = PhotonNetwork.PlayerList[k];
+                Debug.Log("该房间中用户名称为："+p.NickName);
+                GameObject imageloca = imageLocations[k].gameObject;   
+                GameObject entryPlayer = PhotonNetwork.Instantiate("Card", imageloca.transform.position, Quaternion.identity, 0).gameObject;
+                entryPlayer.transform.SetParent(imageloca.transform);
+                entryPlayer.transform.localScale = new Vector3(1.0F,1.0F,1.0F);
+               
+            }
+
+            if (k == 2)
+            {
+                Player p = PhotonNetwork.PlayerList[k];
+                Debug.Log("该房间中用户名称为："+p.NickName);
+                GameObject imageloca = imageLocations[k].gameObject;   
+                GameObject entryPlayer = PhotonNetwork.Instantiate("Card", imageloca.transform.position, Quaternion.identity, 0).gameObject;
+                entryPlayer.transform.SetParent(imageloca.transform);
+                entryPlayer.transform.localScale = new Vector3(1.0F,1.0F,1.0F);
+            }
+
 //            GameObject root = GameObject.Find("Plane");
 //            //GameObject oneButton = root.transform.Find("ShunLocation").gameObject;
 //            Debug.Log("执行了OnPlayerEnteredRoom");
@@ -259,7 +320,7 @@ namespace Photon.Pun.Demo.Asteroids
 
         public void OnLoginButtonClicked()
         {
-            string playerName = "zzzzz"; //PlayerNameInput.text;
+            string playerName = nameField.text;
 
             if (PhotonNetwork.IsConnected)
             {
